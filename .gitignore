@@ -1,0 +1,23 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+
+# OS-specific files
+.DS_Store
+
+# firebae related file
+firebase.js
+serviceAccountKey.json
+serviceAccountKey.json
+
+# Logs
+logs/
+*.log
+
+# Optional: ignore build output or temp files
+dist/
+build/
+*.tmp

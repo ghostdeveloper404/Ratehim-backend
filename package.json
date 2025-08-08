@@ -1,0 +1,38 @@
+{
+  "name": "rateit-backend",
+  "version": "1.0.0",
+  "description": "just app rating anything",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo /* testit */",
+    "start": "node server.js"
+  },
+  "author": "ghostdevloper404",
+  "license": "ISC",
+  "dependencies": {
+    "accepts": "^1.3.8",
+    "body-parser": "^2.2.0",
+    "content-disposition": "^0.5.4",
+    "cookie": "^1.0.2",
+    "cookie-signature": "^1.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "etag": "^1.8.1",
+    "express": "npm:Express@^3.0.1",
+    "Express": "^3.0.1",
+    "finalhandler": "^2.1.0",
+    "firebase-admin": "^13.4.0",
+    "fresh": "^0.5.2",
+    "merge-descriptors": "^2.0.0",
+    "mongoose": "^8.16.5",
+    "multer": "^2.0.2",
+    "proxy-addr": "^2.0.7",
+    "range-parser": "^1.2.1",
+    "router": "^2.2.0",
+    "send": "^1.2.0",
+    "serve-static": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
