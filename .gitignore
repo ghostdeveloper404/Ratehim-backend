@@ -8,8 +8,8 @@ node_modules/
 # OS-specific files
 .DS_Store
 
-# firebae related file
-firebase.js
+# firebase related file
+firebase-debug.log
 serviceAccountKey.json
 serviceAccountKey.json
 
