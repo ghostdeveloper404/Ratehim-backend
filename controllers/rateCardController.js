@@ -154,3 +154,18 @@ exports.deleteRating = async (req, res) => {
     res.status(500).json({ error: "Failed to delete rating" });
   }
 };
+
+exports.getRateCardById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const card = await RateCard.findById(id);
+    if (!card) return res.status(404).json({ message: "RateCard not found." });
+
+    res.json(card);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch rate card.", error: error.message });
+  }
+};
+
+

@@ -3,6 +3,8 @@ const router = express.Router();
 const admin = require('../firebase');
 const User = require('../models/user-model');
 const auth = require('../middleware/auth');
+const { rateUserValidator } = require("../validators/user-validator");
+
 
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
@@ -51,7 +53,7 @@ router.get('/profile', async (req, res) => {
 });
 
 
-router.post('/:userId/rate', auth, async (req, res) => {
+router.post('/:userId/rate', rateUserValidator, auth, async (req, res) => {
   const { rating, comment } = req.body;
   const raterId = req.user.uid;
   const userId = req.params.userId;
@@ -111,7 +113,7 @@ router.get('/:userId/karma', async (req, res) => {
 });
 
 
-router.put('/:userId/rating', auth, async (req, res) => {
+router.put('/:userId/rating', rateUserValidator, auth, async (req, res) => {
   const raterId = req.user.uid;
   const targetUserId = req.params.userId;
   const { rating, comment } = req.body;

@@ -1,15 +1,37 @@
-const { body, param, query } = require("express-validator");
+// validators/rateCardValidator.js
+const Joi = require("joi");
 
-exports.createRateCardValidator = [
-  body("objectType").notEmpty().withMessage("objectType is required."),
-  body("title").notEmpty().withMessage("title is required."),
-  body("tags").optional().isString().withMessage("Tags must be a string."),
-  body("location").optional().isString(),
-];
+// Create RateCard (POST)
+exports.createRateCardSchema = Joi.object({
+  objectType: Joi.string().required().messages({
+    "any.required": "objectType is required.",
+    "string.empty": "objectType is required."
+  }),
+  title: Joi.string().required().messages({
+    "any.required": "title is required.",
+    "string.empty": "title is required."
+  }),
+  tags: Joi.string().optional().messages({
+    "string.base": "Tags must be a string."
+  }),
+  description: Joi.string().required().messages({
+    "any.required": "description is required.",
+    "string.empty": "description is required."
+  }),
+  location: Joi.string().optional().messages({
+    "string.base": "Location must be a string."
+  })
+});
 
-
-exports.addRatingValidator = [
-  param("objectId").notEmpty().withMessage("objectId is required."),
-  body("rating").notEmpty().isNumeric().withMessage("Rating must be a number."),
-];  
-
+// Get RateCards (GET with query params)
+exports.getRateCardsSchema = Joi.object({
+  objectType: Joi.string().optional().messages({
+    "string.base": "objectType must be a string."
+  }),
+  tags: Joi.string().optional().messages({
+    "string.base": "Tags must be a string."
+  }),
+  location: Joi.string().optional().messages({
+    "string.base": "Location must be a string."
+  })
+});
