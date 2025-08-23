@@ -15,6 +15,7 @@ const bodyValidator = (schema) => {
 }
 
 
+
 const queryValidator = (schema) => {
     return (req, res, next) => {
         const { error } = schema.validate(req.query, { abortEarly: true });
@@ -30,5 +31,14 @@ const queryValidator = (schema) => {
         }
     }
   }
+const paramValidator = (schema) => {
+  return (req, res, next) => {
+    const { error } = schema.validate(req.params, { abortEarly: true });
+    if (!error) return next();
 
-module.exports = {bodyValidator,queryValidator};
+    const message = error.details.map(e => e.message).join(', ');
+    return res.status(422).json({ message });
+  };
+};
+
+module.exports = { bodyValidator, queryValidator, paramValidator };

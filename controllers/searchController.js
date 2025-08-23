@@ -1,7 +1,7 @@
 // controllers/searchController.js
 
 const RateCard = require("../models/RateCard");
-const User = require("../models/User");
+const User = require("../models/user-model");
 
 exports.searchAnythingRated = async (req, res) => {
   const { q } = req.query;

@@ -3,7 +3,14 @@ const router = express.Router();
 const admin = require('../firebase');
 const User = require('../models/user-model');
 const auth = require('../middleware/auth');
-const { rateUserValidator } = require("../validators/user-validator");
+const { rateUserSchema  } = require("../validators/user-validator");
+const { bodyValidator, paramValidator } = require("../middleware/model-validation");
+const {
+  addRatingSchema,
+  editRatingSchema,
+  deleteRatingSchema
+} = require("../validators/ratingValidator");
+
 
 
 // POST /api/auth/login
@@ -53,7 +60,11 @@ router.get('/profile', async (req, res) => {
 });
 
 
-router.post('/:userId/rate', rateUserValidator, auth, async (req, res) => {
+router.post('/:userId/rate', auth, 
+  paramValidator(rateUserSchema.params),
+  bodyValidator(rateUserSchema.body),
+   async (req, res) => {
+  
   const { rating, comment } = req.body;
   const raterId = req.user.uid;
   const userId = req.params.userId;
@@ -96,24 +107,11 @@ router.post('/:userId/rate', rateUserValidator, auth, async (req, res) => {
 });
 
 
-router.get('/:userId/karma', async (req, res) => {
-  try {
-    const user = await User.findOne({ uid: req.params.userId });
-
-    if (!user) return res.status(404).json({ message: 'User not found.' });
-
-    res.json({
-      karmaScore: user.karmaScore,
-      ratingsReceived: user.ratingsReceived,
-      ratingsGiven: user.ratingsGiven,
-    });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch karma profile', details: err.message });
-  }
-});
-
-
-router.put('/:userId/rating', rateUserValidator, auth, async (req, res) => {
+router.put('/:userId/rating', auth,
+  paramValidator(rateUserSchema.params),
+  bodyValidator(rateUserSchema.body),
+ 
+   async (req, res) => {
   const raterId = req.user.uid;
   const targetUserId = req.params.userId;
   const { rating, comment } = req.body;
@@ -152,7 +150,7 @@ router.put('/:userId/rating', rateUserValidator, auth, async (req, res) => {
 });
 
 
-router.delete('/:userId/rating', auth, async (req, res) => {
+router.delete('/:userId/rating', auth, paramValidator(deleteRatingSchema),   async (req, res) => {
   const raterId = req.user.uid;
   const targetUserId = req.params.userId;
 

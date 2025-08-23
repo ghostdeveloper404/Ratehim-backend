@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const RateCard = require("../models/RateCard");
 const auth = require("../middleware/auth");
 const upload = require("../middleware/upload"); // multer config
-const { bodyValidator, paramValidator } = require("../middlewares/route-error-handler");
+const { bodyValidator, paramValidator } = require("../middleware/model-validation");
 const {
   addRatingSchema,
   editRatingSchema,

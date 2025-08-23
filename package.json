@@ -23,6 +23,7 @@
     "finalhandler": "^2.1.0",
     "firebase-admin": "^13.4.0",
     "fresh": "^0.5.2",
+    "joi": "^18.0.1",
     "merge-descriptors": "^2.0.0",
     "mongoose": "^8.16.5",
     "multer": "^2.0.2",

@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     raterName: String,
     rating: Number,
     comment: String,
+    tags: [String],
     createdAt: { type: Date, default: Date.now },
   }
  ],
@@ -22,6 +23,7 @@ ratingsGiven: [
     userId: String, // the one they rated
     userName: String,
     rating: Number,
+    tags: [String],
     comment: String,
     createdAt: { type: Date, default: Date.now },
   }

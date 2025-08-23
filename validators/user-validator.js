@@ -11,7 +11,7 @@ const objectIdValidator = (value, helpers) => {
 };
 
 // validators/userValidator.js
-const Joi = require("joi");
+
 
 exports.userSchema = {
   create: Joi.object({
@@ -58,11 +58,16 @@ exports.rateUserSchema = {
       "number.min": "rating must be between 1 and 5.",
       "number.max": "rating must be between 1 and 5."
     }),
+    tag:Joi.string().optional().messages({
+       "array.base": "tags must be an array of strings."
+    }),
     comment: Joi.string().optional().messages({
       "string.base": "comment must be a string."
     })
   })
 };
+
+
 exports.updateRatingSchema = {
   params: Joi.object({
     userId: Joi.string().custom(objectIdValidator).required().messages({
@@ -81,3 +86,6 @@ exports.updateRatingSchema = {
     })
   })
 };
+
+
+

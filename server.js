@@ -5,9 +5,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const rateCardRoutes = require("./routes/rateCard");
 const userRoutes = require("./routes/user-routes");
-const { route, next } = require('./middlewares/validate.middleware');
 const searchRoutes = require("./routes/search-routes")
-const errorHandler = require("./middlewares/router-error-handler")
+const errorHandler = require("./middleware/route-error-handler")
 
 dotenv.config();
 

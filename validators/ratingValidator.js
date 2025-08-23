@@ -27,6 +27,9 @@ exports.addRatingSchema = {
     }),
     comment: Joi.string().optional().messages({
       "string.base": "comment must be a string."
+    }),
+    tags: Joi.array().items(Joi.string()).optional().messages({
+      "array.base": "tags must be an array of strings."
     })
   })
 };
@@ -45,6 +48,9 @@ exports.editRatingSchema = {
       "number.min": "rating must be between 1 and 5.",
       "number.max": "rating must be between 1 and 5."
     }),
+    tags: Joi.array().items(Joi.string()).optional().messages({
+      "array.base": "tags must be an array of strings."
+    }),
     comment: Joi.string().optional().messages({
       "string.base": "comment must be a string."
     })
@@ -52,9 +58,13 @@ exports.editRatingSchema = {
 };
 
 // Delete rating
-exports.deleteRatingSchema = Joi.object({
-  ratingId: Joi.string().custom(objectIdValidator).required().messages({
-    "any.required": "Rating ID is required.",
-    "any.invalid": "Invalid Rating ID."
-  }),
-});
+
+
+exports.deleteRatingSchema = {
+  params: Joi.object({
+    ratingId: Joi.string().custom(objectIdValidator).required().messages({
+      "any.required": "Rating ID is required.",
+      "any.invalid": "Invalid Rating ID."
+    }),
+  })
+};
